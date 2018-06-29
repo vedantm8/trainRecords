@@ -1,0 +1,37 @@
+.schedule-container {
+    min-width: 800px;
+}
+
+.input-container {
+min-width: 800px;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 6px;
+}
+
+.jumbotron {
+    color: white;
+    min-width: 800px;
+}
+.panel-heading{
+    background-color: lightgray;
+}
+.jumbotron{
+    background-color: lightgray;
+}
+.text-center{
+    text-decoration-color: black;
+}
+.panel-title{
+    background-color: lightseagreen;
+    text-align: center;
+    color: whitesmoke;
+}
+.panel-heading{
+    background-color: white;
+}
+.col-md-10{
+    border-color: lightseagreen;
+}

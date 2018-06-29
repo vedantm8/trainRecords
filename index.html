@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Bootstrap CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <!-- Style.css file -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Moment.js CDN -->
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+  <!-- Firebase CDN -->
+  <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+
+
+  <title>Document</title>
+</head>
+
+<body>
+
+  <!-- Big title -->
+  <div class="jumbotron">
+    <h1 class="text-center">Atlantis Train Schedule</h1>
+  </div>
+
+  <div class="container">
+    <div class="row">
+
+      <!-- Shows the time and what not-->
+      <div class="col-md-10">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Current Train Schedule</h3>
+          </div>
+          <div class="panel-body">
+
+            <!--Shows when train is coming -->
+            <table class="train-schedule">
+              <tr>
+                <th class="col-md-3">Train Name
+                </th>
+                <th class="col-md-2">Destination
+                </th>
+                <th class="col-md-2">Frequency (min)
+                </th>
+                <th class="col-md-2">Next Arrival
+                </th>
+                <th class="col-md-2">Minutes Away
+                </th>
+              </tr>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container input-container">
+    <div class="row">
+
+      <!--Add trains here-->
+      <div class="col-md-10">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Add Train</h3>
+          </div>
+          <div class="panel-body">
+
+            <!--You can use the forms here to input strings for the relevant products-->
+            <form role="form">
+              <div class="form-group">
+                <!-- Input the train name -->
+                <label for="text">Train Name</label>
+                <input type="text" class="form-control" id="name-input">
+              </div>
+              <div class="form-group">
+                <label for="text">Destination</label>
+                <!-- Input the destination -->
+                <input type="text" class="form-control" id="destination-input">
+              </div>
+              <div class="form-group">
+                <label for="text">First Train Time (24hr clock)</label>
+                <!-- Input your time using 24hr time -->
+                <input type="text" class="form-control" id="first-train-time-input">
+              </div>
+              <div class="form-group">
+                <!-- Input how frewuenctly the train will arrive -->
+                <label for="comment">Frequency (min)</label>
+                <input type="text" class="form-control" id="frequency-input">
+              </div>
+              <button type="submit" class="btn btn-primary" id="add-train">Submit</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    var config = {
+    apiKey: "AIzaSyDwH13dUyjLEpAV_qOP2V-PgvI5GS8d-s4",
+    authDomain: "my-project-1-432b1.firebaseapp.com",
+    databaseURL: "https://my-project-1-432b1.firebaseio.com",
+    projectId: "my-project-1-432b1",
+    storageBucket: "my-project-1-432b1.appspot.com",
+    messagingSenderId: "1074178147199"
+  };
+
+    firebase.initializeApp(config);
+    var database = firebase.database();
+    var trainName = '';
+    var destination = '';
+    var trainTime = '';
+    var convertedTime = '';
+    var currentTime = '';
+    var diffTime = '';
+    var remainingTime = '';
+    var dataInAShell = '';
+
+    $('ajax')({
+      url: queryURL,
+      method: 'GET'
+    }).then(function(response){
+      
+    })
+
+    $('document').ready(function () {
+      $('#add-train').on('click', function () {
+        //Stops page from reloading when the add train button is clicked. 
+        event.preventDefault();
+
+        //Name now has the value of name input that the user has typed into the respective form. 
+        name = $('#name-input').val().trim();
+        console.log(name);
+
+        //Destination now has the value of the destination name that that user has typed into the respective form 
+        destination = $('#destination-input'), val().trim();
+        console.log(destination);
+
+        //trainName now has the value of the train name input that that the user has typed into the respective form. 
+        trainName = $('#first-train-name-input').val().trim();
+        console.log(trainName);
+
+        //frequency now holds the value of the frequency input that the user has typed into the respecitve form.
+        frequency = $('frequency-input').val().trim();
+        console.log(frequency);
+
+        //Converting the time into hours and minutes and subtracting one from years.
+        firstTimeConverted = moment(firstTrainTime, 'hh:mm').subtract(1, 'years');
+        currentTime = moment();
+        console.log(currentTime);
+
+        //Figuring out the difference between the times
+        diffTime = moment().diff(moment(firstTimeConverted), 'minutes');
+        console.log(diffTime);
+
+        //Remainder after dividing minutes left on train from frequency of trains
+        remainingTime = Dtime % frequency;
+        console.log(remainingTime);
+
+        //How many minutes left until the train arrives
+        var minTillTrainArrives = frequency - remainingTime;
+        console.log(minTillTrainArrives);
+
+        var nextTrain = moment.add(minTillTrainArrives, 'minutes');
+        console.log('ArriveTime: ' + moment(nextTrain).format('HH:MM'));
+      });
+    });
+  </script>
+</body>
+
+</html>
