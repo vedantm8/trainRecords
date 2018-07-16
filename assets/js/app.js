@@ -7,7 +7,7 @@ var currentTime = '';
 var diffTime = '';
 var remainingTime = '';
 var dataInAShell = '';
-var queryURL = "https://www.gstatic.com/firebasejs/5.2.0/firebase.js;
+var queryURL = "https://www.gstatic.com/firebasejs/5.2.0/firebase.js";
 
 
 $('ajax')({
